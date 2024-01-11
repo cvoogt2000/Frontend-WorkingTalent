@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BooklistComponent } from './components/booklist/booklist.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,10 +17,12 @@ import { ProductDetailsComponent } from './components/product-details/product-de
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
