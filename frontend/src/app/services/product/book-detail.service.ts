@@ -6,12 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookDetailService {
-  private apiUrl = 'https://isbnsearch.org/isbn';
 
   constructor(private http: HttpClient) { }
 
-  getBookByIsbn(isbn: number): Observable<any> {
-    const url = `${this.apiUrl}/${isbn}`;
-    return this.http.get(url);
-  }
 }
