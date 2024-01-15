@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
 
   private apiUrl = 'http://localhost:8082/product/book'
