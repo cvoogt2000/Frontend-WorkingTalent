@@ -1,0 +1,26 @@
+<h1><strong>Catalogus Lesmateriaal</strong></h1>
+<hr>   
+<div class="row p-1">
+    <div class="card-group">
+        <div class="col-sm-auto p-2">
+            <div *ngFor="let book of books">
+                <div class="card p-1">
+                    <img src="assets\illustration-of-book-icon-free-vector.jpg" alt="img-thumbnail">
+                    <div class="card-body">
+                        <div class="title">
+                            <h5 class="card-title"> {{ book.title }} </h5>
+                        </div>
+                        <div class="author">
+                            <h6 class="card-subtitle text-muted">naam</h6>
+                        </div>
+                        <div class="description">
+                            <p class="card-text">
+                                {{ book.description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>                     
+        </div>
+    </div>
+</div>            
