@@ -15,10 +15,10 @@ export class CatalogComponent {
     private productService: ProductService
   ) {}
   
-  ngOninit(): void {
+  ngOnInit(): void {
     this.getAllBooks();
   }
-  
+
   getAllBooks(): void {
     this.productService.getAllBooks().subscribe(data => {
       this.books = data;
