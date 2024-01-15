@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../../services/product/product.service';
+import { BookService } from '../../services/product/book.service';
 
 @Component({
   selector: 'app-catalog',
@@ -10,9 +10,8 @@ export class CatalogComponent {
   
   books: any[] = [];
 
-
   constructor (
-    private productService: ProductService
+    private bookService: BookService
   ) {}
   
   ngOnInit(): void {
@@ -20,7 +19,7 @@ export class CatalogComponent {
   }
 
   getAllBooks(): void {
-    this.productService.getAllBooks().subscribe(data => {
+    this.bookService.getAllBooks().subscribe(data => {
       this.books = data;
     });
   }
