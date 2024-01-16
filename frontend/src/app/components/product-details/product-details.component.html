@@ -23,12 +23,20 @@
                         class="btn text-black"
                         >Reserveren
                     </button>
+                    <div class="voorraad">
+                        <div *ngIf="!book.copies.available">
+                            <p class="text-success">Op voorraad</p>
+                        </div>
+                        <div *ngIf="book.copies.available">
+                            <p class="text-danger">Niet op voorraad</p>
+                        </div>
+                    </div>
                 </div>
                 <!-- For the Admin -->
                 <div class="button-edit">
                     <button 
                         type="button" 
-                        class="btn text-black"
+                        class="btn text-black" disabled
                         >Wijzigen
                     </button>
                 </div>
