@@ -15,6 +15,22 @@
     padding-left: 10px;
 }
 
-.desciption p {
-    padding:0;
+.button-reserve button {
+    background-color: #00e600;
+}
+
+.button-edit button {
+    background-color: #00e600;
+}
+
+.title-and-buttons {
+    margin-top: 1rem;
+}
+
+.button-back a:hover {
+    color: #00e600;
+}
+
+.button-back a {
+    color: gray;
 }

@@ -1,18 +1,37 @@
 <div *ngIf="book">
     <div class="container-fluid">
-        <div class="title-and-buttons">
+        <div class="button-back">
+            <a routerLink="/catalogus" class="text-decoration-none">
+                <i class="fa-solid fa-arrow-left fa-sm"></i>
+                Catalogus
+            </a>
+        </div>
+        <div class="title-and-buttons d-flex justify-content-between">
             <div class="title">
-                <h1>
-                    <a routerLink="/catalogus" class="text-black text-decoration-none">
-                        {{book.title}}
-                    </a>
-                </h1>
+                <h2>
+                    {{book.title}}
+                </h2>
                 <h5 class="text-black text-muted">
                     {{ book.author.name }}
                 </h5>
             </div>
-            <div class="buttons">
-
+            <div class="buttons d-grid gap-2 d-md-flex justify-content-md-end">
+                <!-- For the trainee -->
+                <div class="button-reserve">
+                    <button 
+                        type="button" 
+                        class="btn text-black"
+                        >Reserveren
+                    </button>
+                </div>
+                <!-- For the Admin -->
+                <div class="button-edit">
+                    <button 
+                        type="button" 
+                        class="btn text-black"
+                        >Wijzigen
+                    </button>
+                </div>
             </div>
         </div>
         <div class="image-details">
@@ -45,7 +64,7 @@
                     <p class="mt-0">{{ book.format }} </p>
                 </div>
                 <div class="page-count">
-                    <p class="mb-0"><i class="fa-regular fa-file fa-sm" style="color: #00e600;"></i><strong class="detail">Bladzijdes</strong></p>
+                    <p class="mb-0"><i class="fa-solid fa-file fa-sm" style="color: #00e600;"></i><strong class="detail">Bladzijdes</strong></p>
                     <p class="mt-0">{{ book.pageCount }} </p>
                 </div>
                 <div class="rating">
