@@ -1,0 +1,20 @@
+.cover-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    padding-top: 1rem;
+    padding-right: 3rem;
+}
+
+.image-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.detail {
+    padding-left: 10px;
+}
+
+.desciption p {
+    padding:0;
+}
