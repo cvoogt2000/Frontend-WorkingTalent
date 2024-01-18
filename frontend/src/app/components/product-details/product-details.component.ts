@@ -24,6 +24,7 @@ export class ProductDetailsComponent {
     if(!!bookIdParam) {
       this.bookService.getBookById(parseInt(bookIdParam)).subscribe(data => {
         this.book = data;
+        console.log(data.tags);
       });
     }
   }
