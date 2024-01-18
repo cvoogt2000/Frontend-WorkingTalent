@@ -61,7 +61,7 @@
                 </div>
                 <div class="release-date">
                     <p class="mb-0"><i class="fa-solid fa-calendar-days fa-sm" style="color: #00e600;"></i><strong class="detail">Publicatiedatum</strong></p>
-                    <p class="mt-0">{{ book.releaseDate }} </p>
+                    <p class="mt-0">{{ book.releaseDate | date:'dd-MM-yyyy' }} </p>
                 </div>
                 <div class="edition">
                     <p class="mb-0"><i class="fa-solid fa-bookmark fa-sm" style="color: #00e600;"></i><strong class="detail">Editie</strong></p>
@@ -81,11 +81,16 @@
                 </div>
                 <div class="tags">
                     <p class="mb-0"><i class="fa-solid fa-tags fa-sm" style="color: #00e600;"></i><strong class="detail">Tags</strong></p>
-                    <p class="mt-0">{{ book.tags }} </p>
+                    <p *ngFor="let tag of book.tags" class="mt-0 mb-0">
+                        {{ tag }}
+                    </p>
                 </div>
                 <div class="related-courses">
-                    <p class="mb-0"><i class="fa-solid fa-award fa-sm" style="color: #00e600;"></i><strong class="detail">Specialisatie</strong></p>
+                    <p class="mb-0 mt-3"><i class="fa-solid fa-award fa-sm" style="color: #00e600;"></i><strong class="detail">Specialisatie</strong></p>
                     <p class="mt-0">{{ book.relatedCourses }} </p>
+                    <p *ngFor="let course of book.relateCourses" class="mt-0 mb-0">
+                        {{ course }}
+                    </p>
                 </div>
             </div>
         </div>
