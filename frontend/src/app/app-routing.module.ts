@@ -1,4 +1,4 @@
-import { ApplicationConfig, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes, provideRouter } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
@@ -8,7 +8,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { HomepageComponent } from './components/homepage/homepage.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent},
+  { path: '', component: HomepageComponent},
   { path: 'login', component: LoginComponent},
   { path: 'catalogus', component: CatalogComponent},
   { path: 'boek/:id', component: ProductDetailsComponent},
