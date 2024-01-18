@@ -2,7 +2,7 @@
   /* Style for navigation links within the header */
   .nav {
     padding-top: 0;
-    padding-bottom: 0;
+    padding-bottom: 0px;
     display:inline; /* Use flexbox for layout */
   }
   
@@ -12,9 +12,8 @@
   }
 
   .navbar-nav a{
-    padding-top: 20px;
-    margin-right: 40px;
-    padding-left: 40px;
+    padding: 10px;
+    margin: 10px;
     text-decoration: none; /* Remove underlines from links */
     font-size:large;
   }
@@ -25,6 +24,12 @@
 
   .navbar-nav a:hover {
     background-color: #00e600;
-}
+  }
 
+  hr {
+    height: 4px;
+    border: none;
+    background-color: #c1c1c1;
+    margin: 0%;
+  }
 
