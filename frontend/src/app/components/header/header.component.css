@@ -1,0 +1,30 @@
+
+  /* Style for navigation links within the header */
+  .nav {
+    padding-top: 0;
+    padding-bottom: 0;
+    display:inline; /* Use flexbox for layout */
+  }
+  
+  .navbar-brand {
+    height:100%;
+    width: auto;
+  }
+
+  .navbar-nav a{
+    padding-top: 20px;
+    margin-right: 40px;
+    padding-left: 40px;
+    text-decoration: none; /* Remove underlines from links */
+    font-size:large;
+  }
+
+  button {
+    background-color: #00e600;
+  }
+
+  .navbar-nav a:hover {
+    background-color: #00e600;
+}
+
+
