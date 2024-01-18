@@ -17,9 +17,14 @@ export class ProductDetailsComponent {
   ) {}
 
   ngOnInit(): void{
-    const id = +this.route.snapshot.paramMap.get('id')!;
-    this.bookService.getBookById(id).subscribe(data => {
-      this.book = data;
-    });
+    let bookIdParam = this.route.snapshot.paramMap.get('id');
+    // !! test of een string leeg is. 
+    // Vanuit een URL krijg je een string terug als ID 
+    // Daarom parseInt om hem in integer te krijgen
+    if(!!bookIdParam) {
+      this.bookService.getBookById(parseInt(bookIdParam)).subscribe(data => {
+        this.book = data;
+      });
+    }
   }
 }
