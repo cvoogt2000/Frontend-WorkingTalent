@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <nav class="navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/catalogus">
+            <h1><strong>Catalogus</strong></h1>
+          </a>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" style="width: 250px;" placeholder="Waar ben je naar op zoek?" aria-label="Search">
+            <button class="btn btn-outline" type="submit">Zoek</button>
+          </form>
+        </div>
+    </nav>
+    <hr>   
+    <div class="row row-cols-1 row-cols-md-3 g-5">
+        <div *ngFor="let book of books" class="col mb-3">
+            <a [routerLink]="['/boek', book.id]" class="text-black text-decoration-none">
+                <div class="card h-100 shadow text-bg-light">
+                    <img src="assets/no-book-cover.png" alt="img-thumbnail" class="card-img-fluid mx-auto" style="width: 20rem;">
+                    <div class="card-body">
+                        <div class="title">
+                            <h5 class="card-title"> {{ book.title }} </h5>
+                        </div>
+                        <div class="author">
+                            <h6 class="card-subtitle text-muted">{{book.author.name}}</h6>
+                        </div>
+                        <div class="description">
+                            <p class="card-text">
+                                {{ book.description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>   
+</div>    
+             
