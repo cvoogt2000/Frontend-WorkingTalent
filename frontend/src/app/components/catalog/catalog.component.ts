@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { BookService } from '../../services/product/book.service';
-import { FilterService } from '../../services/filter/filter.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -12,25 +11,16 @@ export class CatalogComponent {
   
   books: any[] = [];
   query: string = '';
+  searchBooks: any[] = [];
 
   constructor (
     private bookService: BookService,
-    private filterService: FilterService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
   
   ngOnInit(): void {
     this.getAllBooks();
-
-    this.query = this.filterService.querySearch.getValue();
-
-    this.route.queryParams.subscribe(params => {
-      if (this.router.url === '/catalogus') {
-        this.resetQuery();
-      }
-      this.query = params['query'];
-    });
   }
 
   getAllBooks(): void {
@@ -40,11 +30,18 @@ export class CatalogComponent {
   }
 
   resetQuery() {
-    this.query = "";
+    this.getAllBooks();
+    this.query = '';
   }
 
-  onSearch() {
-    this.filterService.setQuery(this.query);
-    this.filterService.navigate();
+  onSearch(): void {
+    this.bookService.getBookByTitle(this.query).subscribe(data => {
+      this.searchBooks = data;
+      this.books = this.searchBooks;
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { query: this.query }
+      });
+    });
   }
 }
