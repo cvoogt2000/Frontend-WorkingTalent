@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { BookService } from '../../services/product/book.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../services/user/user.service';
+import { OrderProductService } from '../../services/order-product/order-product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -10,10 +12,14 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductDetailsComponent {
   
   book: any;
+  storedQuery: any;
+  //public userId: any = User.id;
 
   constructor(
     private bookService: BookService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private orderproductService: OrderProductService
   ) {}
 
   ngOnInit(): void{
@@ -26,5 +32,26 @@ export class ProductDetailsComponent {
         this.book = data;
       });
     }
+
+    // Remember and navigate back with the same query
+    this.route.queryParams.subscribe(queryParams => {
+      if (queryParams['query']) {
+        // Store the query in a variable or service to use later
+        this.storedQuery = queryParams['query'];
+      } 
+    });
+  }
+
+  OrderProduct(id: number): void {
+    const userId =  2; //this.userId;
+
+    this.orderproductService.orderProduct(userId, id).subscribe({
+      next: (data) => {
+        console.log('Product requested successfully', data);
+      },
+      error: (error) => {
+        console.log('Error requesting product', error);
+      }
+    });
   }
 }

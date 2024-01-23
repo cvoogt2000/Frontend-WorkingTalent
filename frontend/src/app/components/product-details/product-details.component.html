@@ -1,7 +1,7 @@
 <div *ngIf="book">
     <div class="container-fluid">
         <div class="button-back">
-            <a routerLink="/catalogus" class="text-decoration-none">
+            <a routerLink="/catalogus" [queryParams]="{ query: storedQuery }" class="text-decoration-none">
                 <i class="fa-solid fa-arrow-left fa-sm"></i>
                 Catalogus
             </a>
@@ -21,13 +21,14 @@
                     <button 
                         type="button" 
                         class="btn text-black"
+                        (click)="OrderProduct(book.id)"
                         >Reserveren
                     </button>
                     <div class="voorraad">
-                        <div *ngIf="!book.copies.available">
+                        <div *ngIf="book.available">
                             <p class="text-success">Op voorraad</p>
                         </div>
-                        <div *ngIf="book.copies.available">
+                        <div *ngIf="!book.available">
                             <p class="text-danger">Niet op voorraad</p>
                         </div>
                     </div>
@@ -87,10 +88,10 @@
                 </div>
                 <div class="related-courses">
                     <p class="mb-0 mt-3"><i class="fa-solid fa-award fa-sm" style="color: #00e600;"></i><strong class="detail">Specialisatie</strong></p>
-                    <p class="mt-0">{{ book.relatedCourses }} </p>
+                    <!-- <p class="mt-0">{{ book.relatedCourses }} </p>
                     <p *ngFor="let course of book.relateCourses" class="mt-0 mb-0">
                         {{ course }}
-                    </p>
+                    </p> -->
                 </div>
             </div>
         </div>

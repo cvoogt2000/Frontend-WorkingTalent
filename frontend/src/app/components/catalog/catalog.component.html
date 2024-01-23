@@ -1,16 +1,16 @@
 <div class="container-fluid">
     <nav class="navbar">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/catalogus">
+          <a class="navbar-brand" routerLink="/catalogus" (click)="resetQuery()">
             <h1><strong>Catalogus</strong></h1>
           </a>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" style="width: 250px;" placeholder="Waar ben je naar op zoek?" aria-label="Search">
-            <button class="btn btn-outline" type="submit">Zoek</button>
-          </form>
+          <div class="search-bar">
+            <input class="search-input me-2" type="text" [(ngModel)]="query" (keyup.enter)="onSearch()" style="width: 250px;" placeholder="Waar ben je naar op zoek?">
+            <button class="btn btn-outline" (click)="onSearch()">Zoek</button>
+          </div>
         </div>
     </nav>
-    <hr>   
+    <hr>
     <div class="row row-cols-1 row-cols-md-3 g-5">
         <div *ngFor="let book of books" class="col mb-3">
             <a [routerLink]="['/boek', book.id]" class="text-black text-decoration-none">
@@ -32,6 +32,6 @@
                 </div>
             </a>
         </div>
-    </div>   
+    </div>     
 </div>    
              
