@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <nav class="navbar">
         <div class="container-fluid">
-          <a class="navbar-brand" routerLink="/catalogus">
+          <a class="navbar-brand" routerLink="/catalogus" (click)="resetQuery()">
             <h1><strong>Catalogus</strong></h1>
           </a>
           <div class="search-bar">
@@ -10,7 +10,7 @@
           </div>
         </div>
     </nav>
-    <hr>   
+    <hr>
     <div class="row row-cols-1 row-cols-md-3 g-5">
         <div *ngFor="let book of books" class="col mb-3">
             <a [routerLink]="['/boek', book.id]" class="text-black text-decoration-none">
@@ -32,6 +32,6 @@
                 </div>
             </a>
         </div>
-    </div>   
+    </div>     
 </div>    
              

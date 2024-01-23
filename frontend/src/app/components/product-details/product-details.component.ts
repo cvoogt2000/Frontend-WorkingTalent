@@ -12,6 +12,7 @@ import { OrderProductService } from '../../services/order-product/order-product.
 export class ProductDetailsComponent {
   
   book: any;
+  storedQuery: any;
   //public userId: any = User.id;
 
   constructor(
@@ -29,13 +30,20 @@ export class ProductDetailsComponent {
     if(!!bookIdParam) {
       this.bookService.getBookById(parseInt(bookIdParam)).subscribe(data => {
         this.book = data;
-        this.book.userId
       });
     }
+
+    // Remember and navigate back with the same query
+    this.route.queryParams.subscribe(queryParams => {
+      if (queryParams['query']) {
+        // Store the query in a variable or service to use later
+        this.storedQuery = queryParams['query'];
+      } 
+    });
   }
 
   OrderProduct(id: number): void {
-    const userId =  3; //this.userId;
+    const userId =  2; //this.userId;
 
     this.orderproductService.orderProduct(userId, id).subscribe({
       next: (data) => {
