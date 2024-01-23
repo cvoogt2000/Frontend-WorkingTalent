@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { BookService } from '../../services/product/book.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../services/user/user.service';
+import { OrderProductService } from '../../services/order-product/order-product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -10,10 +12,13 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductDetailsComponent {
   
   book: any;
+  //public userId: any = User.id;
 
   constructor(
     private bookService: BookService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private orderproductService: OrderProductService
   ) {}
 
   ngOnInit(): void{
@@ -24,7 +29,21 @@ export class ProductDetailsComponent {
     if(!!bookIdParam) {
       this.bookService.getBookById(parseInt(bookIdParam)).subscribe(data => {
         this.book = data;
+        this.book.userId
       });
     }
+  }
+
+  OrderProduct(id: number): void {
+    const userId =  3; //this.userId;
+
+    this.orderproductService.orderProduct(userId, id).subscribe({
+      next: (data) => {
+        console.log('Product requested successfully', data);
+      },
+      error: (error) => {
+        console.log('Error requesting product', error);
+      }
+    });
   }
 }
