@@ -1,35 +1,66 @@
+/* Basic styling for the header */
+header {
+    background-color: #ffffff; /* Set the background color */
+    color: #000000; /* Set the text color to white */
+    padding: 10px 20px; /* Add some padding around the content */
+    text-align:center; /* Center-align the text */
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+    justify-content: space-between;
+    display:inline-flex;
 
+  }
+  
   /* Style for navigation links within the header */
-  .nav {
+  header nav {
     padding-top: 0;
-    padding-bottom: 0px;
+    padding-bottom: 0;
     display:inline; /* Use flexbox for layout */
   }
   
-  .navbar-brand {
+  header.navbar-brand img{
     height:100%;
     width: auto;
   }
 
-  .navbar-nav a{
-    padding: 10px;
-    margin: 10px;
+  header nav a{
+    margin: 25px;
+    padding: 15px;
     text-decoration: none; /* Remove underlines from links */
+    color: #000000; /* Set the link text color to white */
+    font-weight: bold; /* Make the text bold */
     font-size:large;
+    gap: 40px;
   }
 
-  button {
-    background-color: #00e600;
+  header d-flex justify-content-end
+
+  /* Style for a logo within the header */
+  header.logo {
+    max-width: 100%; /* Set a maximum width for the logo */
+    height: auto; /* Maintain the aspect ratio */
+    margin: 0 auto;
+    margin: 20px;
+    display: inline;
+    align-items: center;
   }
 
-  .navbar-nav a:hover {
-    background-color: #00e600;
+  header.img{
+    height: auto;
+    display: flex;
+    align-items: center;
   }
 
-  hr {
-    height: 4px;
-    border: none;
-    background-color: #c1c1c1;
-    margin: 0%;
+  header button{
+    background-color: rgb(0, 255, 0);
+    border-color: white;
+    border-radius: 1px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
   }
 
+  header.nav-icon.notification-bell{
+    background-color: black;
+  }

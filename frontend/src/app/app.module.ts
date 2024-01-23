@@ -9,6 +9,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { LoginComponent } from './components/login/login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { OrderOverviewAdminComponent } from './components/order-overview-admin/order-overview-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CatalogComponent,
     ProductDetailsComponent,
     LoginComponent,
-    HomepageComponent
+    HomepageComponent,
+    OrderOverviewAdminComponent
   ],
   imports: [
     BrowserModule,
