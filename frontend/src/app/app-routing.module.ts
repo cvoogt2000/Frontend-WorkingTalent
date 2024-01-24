@@ -6,13 +6,15 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideClientHydration } from '@angular/platform-browser';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { OrderOverviewAdminComponent } from './components/order-overview-admin/order-overview-admin.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
   { path: 'login', component: LoginComponent},
   { path: 'catalogus', component: CatalogComponent},
   { path: 'boek/:id', component: ProductDetailsComponent},
-  { path: 'home', component: HomepageComponent}
+  { path: 'home', component: HomepageComponent},
+  { path: 'bestelgeschiedenis', component: OrderOverviewAdminComponent}
 ];
 
 @NgModule({
