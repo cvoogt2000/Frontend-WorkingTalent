@@ -18,12 +18,14 @@
             <div class="buttons d-grid gap-2 d-md-flex justify-content-md-end">
                 <!-- For the trainee -->
                 <div class="button-reserve">
-                    <button 
-                        type="button" 
-                        class="btn text-black"
-                        (click)="OrderProduct(book.id)"
-                        >Reserveren
-                    </button>
+                    <a routerLink="/bestelgeschiedenis">
+                        <button 
+                            type="button" 
+                            class="btn text-black"
+                            (click)="OrderProduct(book.id)"
+                            >Reserveren
+                        </button>
+                    </a>
                     <div class="voorraad">
                         <div *ngIf="book.available">
                             <p class="text-success">Op voorraad</p>
