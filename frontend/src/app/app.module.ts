@@ -1,29 +1,39 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { BooklistComponent } from './components/booklist/booklist.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { OrderOverviewAdminComponent } from './components/order-overview-admin/order-overview-admin.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    BooklistComponent,
-    ProductDetailsComponent
+    CatalogComponent,
+    ProductDetailsComponent,
+    LoginComponent,
+    HomepageComponent,
+    OrderOverviewAdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
-    provideClientHydration(),
-    HttpClientModule
+    HttpClient
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

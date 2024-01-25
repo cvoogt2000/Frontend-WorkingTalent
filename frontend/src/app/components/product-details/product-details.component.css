@@ -1,0 +1,36 @@
+.cover-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    padding-top: 1rem;
+    padding-right: 3rem;
+}
+
+.image-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.detail {
+    padding-left: 10px;
+}
+
+.button-reserve button {
+    background-color: #00e600;
+}
+
+.button-edit button {
+    background-color: #00e600;
+}
+
+.title-and-buttons {
+    margin-top: 1rem;
+}
+
+.button-back a:hover {
+    color: #00e600;
+}
+
+.button-back a {
+    color: gray;
+}

@@ -1,1 +1,102 @@
-<p>Product Details on this page</p>
+<div *ngIf="book">
+    <div class="container-fluid">
+        <div class="button-back">
+            <a routerLink="/catalogus" [queryParams]="{ query: storedQuery }" class="text-decoration-none">
+                <i class="fa-solid fa-arrow-left fa-sm"></i>
+                Catalogus
+            </a>
+        </div>
+        <div class="title-and-buttons d-flex justify-content-between">
+            <div class="title">
+                <h2>
+                    {{book.title}}
+                </h2>
+                <h5 class="text-black text-muted">
+                    {{ book.author.name }}
+                </h5>
+            </div>
+            <div class="buttons d-grid gap-2 d-md-flex justify-content-md-end">
+                <!-- For the trainee -->
+                <div class="button-reserve">
+                    <a routerLink="/bestelgeschiedenis">
+                        <button 
+                            type="button" 
+                            class="btn text-black"
+                            (click)="OrderProduct(book.id)"
+                            >Reserveren
+                        </button>
+                    </a>
+                    <div class="voorraad">
+                        <div *ngIf="book.available">
+                            <p class="text-success">Op voorraad</p>
+                        </div>
+                        <div *ngIf="!book.available">
+                            <p class="text-danger">Niet op voorraad</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- For the Admin -->
+                <div class="button-edit">
+                    <button 
+                        type="button" 
+                        class="btn text-black" disabled
+                        >Wijzigen
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="image-details">
+            <div class="cover-image">
+                <img src="assets/no-book-cover.png" alt="{{ book.title }}">
+            </div>
+            <div class="book-details">
+                <div class="description">
+                    <p class="mb-0"><i class="fa-solid fa-book fa-sm" style="color: #00e600;"></i> <strong class="detail">Beschrijving</strong></p>
+                    <p class="mt-0">{{book.description}}</p>
+                </div>
+                <div class="ISBN">
+                    <p class="mb-0"><i class="fa-solid fa-barcode fa-sm" style="color: #00e600;"></i> <strong class="detail">ISBN</strong></p>
+                    <p class="mt-0">{{ book.isbnNumber }} </p>
+                </div>
+                <div class="publisher">
+                    <p class="mb-0"><i class="fa-solid fa-building fa-sm" style="color: #00e600;"></i><strong class="detail">Uitgever</strong></p>
+                    <p class="mt-0">{{ book.publisher }} </p>
+                </div>
+                <div class="release-date">
+                    <p class="mb-0"><i class="fa-solid fa-calendar-days fa-sm" style="color: #00e600;"></i><strong class="detail">Publicatiedatum</strong></p>
+                    <p class="mt-0">{{ book.releaseDate | date:'dd-MM-yyyy' }} </p>
+                </div>
+                <div class="edition">
+                    <p class="mb-0"><i class="fa-solid fa-bookmark fa-sm" style="color: #00e600;"></i><strong class="detail">Editie</strong></p>
+                    <p class="mt-0">{{ book.edition }} </p>
+                </div>
+                <div class="format">
+                    <p class="mb-0"><i class="fa-solid fa-print fa-sm" style="color: #00e600;"></i><strong class="detail">Format</strong></p>
+                    <p class="mt-0">{{ book.format }} </p>
+                </div>
+                <div class="page-count">
+                    <p class="mb-0"><i class="fa-solid fa-file fa-sm" style="color: #00e600;"></i><strong class="detail">Bladzijdes</strong></p>
+                    <p class="mt-0">{{ book.pageCount }} </p>
+                </div>
+                <div class="rating">
+                    <p class="mb-0"><i class="fa-solid fa-star fa-sm" style="color: #00e600;"></i><strong class="detail">Rating</strong></p>
+                    <p class="mt-0">{{ book.rating }} </p>
+                </div>
+                <div class="tags">
+                    <p class="mb-0"><i class="fa-solid fa-tags fa-sm" style="color: #00e600;"></i><strong class="detail">Tags</strong></p>
+                    <p *ngFor="let tag of book.tags" class="mt-0 mb-0">
+                        {{ tag }}
+                    </p>
+                </div>
+                <div class="related-courses">
+                    <p class="mb-0 mt-3"><i class="fa-solid fa-award fa-sm" style="color: #00e600;"></i><strong class="detail">Specialisatie</strong></p>
+                    <!-- <p class="mt-0">{{ book.relatedCourses }} </p>
+                    <p *ngFor="let course of book.relateCourses" class="mt-0 mb-0">
+                        {{ course }}
+                    </p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
