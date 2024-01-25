@@ -1,24 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
+import { LoginResponseDto } from '../../dto/LoginResponseDto';
+import { ResponseDto } from '../../dto/ResponseDto';
+import { SaveUserDto } from '../../dto/SaveUserDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8082/user';
 
+  constructor(private http: HttpClient) { }
 
-
-  constructor(
-    private http: HttpClient
-  ) { }
-
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, {
+  login(email: string | null, password: string | null): Observable<LoginResponseDto> {
+    return this.http.post<LoginResponseDto>(environment.BACKEND_URL + '/user/login', {
       email: email,
       password: password
     })
+  }
+
+  update(id: number, dto: SaveUserDto): Observable<ResponseDto> {
+    return this.http.put<ResponseDto>(environment.BACKEND_URL + '/user/' + id, dto);
   }
 
 }

@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'catalogus', component: CatalogComponent},
   { path: 'boek/:id', component: ProductDetailsComponent},
-  { path: 'home', component: HomepageComponent},
+  { path: 'homepage', component: HomepageComponent},
   { path: 'bestelgeschiedenis', component: OrderOverviewAdminComponent}
 ];
 
