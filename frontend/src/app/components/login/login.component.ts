@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem("WT_TOKEN", data.token);
                     localStorage.setItem("WT_NAME", data.name);
                     localStorage.setItem("WT_ADMIN", data.admin ? "true" : "false");
-                    window.location.replace('/homepage');
+                    localStorage.setItem("WT_USERID", data.id);
+                    window.location.replace('/besteloverzicht');
                   } else {
                     localStorage.clear();
                     alert("Login is niet gelukt");

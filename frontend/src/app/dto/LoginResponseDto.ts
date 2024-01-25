@@ -3,4 +3,5 @@ export class LoginResponseDto {
   token!: string;
   admin!: boolean;
   name!: string;
+  id!: any;
 }

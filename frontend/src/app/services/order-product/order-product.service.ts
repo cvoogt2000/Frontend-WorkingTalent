@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderProductService {
-  private apiUrl = 'http://localhost:8082/reservation'
 
   constructor(
     private http: HttpClient
@@ -18,6 +18,6 @@ export class OrderProductService {
       bookId: bookId,
       userId: userId,
     }
-    return this.http.post(`${this.apiUrl}`, orderData,  {})
+    return this.http.post(environment.BACKEND_URL + '/reservation', orderData,  {})
   }
 }

@@ -1,34 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
-  private apiUrl = 'http://localhost:8082/product/book';
-  private apiUrlsearch = 'http://localhost:8082/product/book/title';
-  private apiUrlsearchTag = 'http://localhost:8082/product/book/tag/name'
-
   constructor(
     private http: HttpClient
   ) {}
 
-  getAllBooks(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/all`);
+  getAllBooks(): Observable<any> {
+    return this.http.get(environment.BACKEND_URL + '/product/book/all');
   }
-
+  
   getBookById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    return this.http.get(environment.BACKEND_URL + '/product/book/' + id);
   }
 
   getBookByTitle(title: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrlsearch}/${title}`);
-  }
+    return this.http.get(environment.BACKEND_URL + '/product/book/title/' + title);
+  }  
 
-  getBookByTagName(tag: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrlsearchTag}/${tag}`);
-  }
-  
 }

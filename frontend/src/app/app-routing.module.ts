@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'catalogus', component: CatalogComponent},
   { path: 'boek/:id', component: ProductDetailsComponent},
   { path: 'homepage', component: HomepageComponent},
-  { path: 'bestelgeschiedenis', component: OrderOverviewAdminComponent}
+  { path: 'besteloverzicht', component: OrderOverviewAdminComponent}
 ];
 
 @NgModule({
