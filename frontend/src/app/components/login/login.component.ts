@@ -14,25 +14,32 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder
   ) { }
-  
+
   loginForm = this.formBuilder.group({
     email: ['', Validators.required],
     password: ['', Validators.required]
   });
 
   submitLogin(): void {
-    this.userService.login(this.loginForm.value.email!, this.loginForm.value.password!)
+    this.userService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
             .subscribe({
                 next: (data) => {
-                    localStorage.setItem("key", data.key);
+                  if (data.success) {
+                    localStorage.setItem("WT_TOKEN", data.token);
+                    localStorage.setItem("WT_NAME", data.name);
+                    localStorage.setItem("WT_ADMIN", data.admin ? "true" : "false");
                     window.location.replace('/homepage');
+                  } else {
+                    localStorage.clear();
+                    alert("Login is niet gelukt");
+                  }
                 },
-                error: (error) => {              
+                error: (error) => {
                     if (error.error.message) {
                         this.errorMessage = error.error.message;
                     } else {
 
-                        this.errorMessage = error.error;               
+                        this.errorMessage = error.error;
                     }
                     this.loginForm.patchValue({ password: ''});
                 }

@@ -53,7 +53,7 @@ header {
   }
 
   header button{
-    background-color: rgb(0, 255, 0);
+    background-color: #00e600;
     border-color: white;
     border-radius: 1px;
     color: white;
@@ -64,3 +64,14 @@ header {
   header.nav-icon.notification-bell{
     background-color: black;
   }
+
+  .btn {
+    background-color: #00e600;
+  }
+
+  .nav-item :hover {
+    background-color: #00e600;
+  }
+
+
+
