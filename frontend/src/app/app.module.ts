@@ -12,6 +12,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { OrderOverviewAdminComponent } from './components/order-overview-admin/order-overview-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from '../app/interceptor/TokenInterceptor';
+import { OrderOverviewTraineeComponent } from './components/order-overview-trainee/order-overview-trainee.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TokenInterceptor } from '../app/interceptor/TokenInterceptor';
     ProductDetailsComponent,
     LoginComponent,
     HomepageComponent,
-    OrderOverviewAdminComponent
+    OrderOverviewAdminComponent,
+    OrderOverviewTraineeComponent
   ],
   imports: [
     BrowserModule,
