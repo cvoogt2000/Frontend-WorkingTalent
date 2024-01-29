@@ -1,21 +1,25 @@
-import { Component } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'frontend';
-  // public isLoginPage: boolean = false;
 
-  // constructor (){
-  //   this.isLoginPage = window.location.pathname == '/login';
+  public isLoginPage: boolean = false;
 
-  //   const token = localStorage.getItem('key');
-  //       if (token === null && window.location.pathname != '/login') {
-  //           window.location.replace("/login");
-  //       }
-  // }
+  constructor ( @Inject(PLATFORM_ID) private platformId: object ){
+    if (isPlatformBrowser(this.platformId)) {
+      this.isLoginPage = window.location.pathname == '/login';
+
+      const token = localStorage.getItem("WT_TOKEN");
+        if (token === null && window.location.pathname != '/login') {
+            window.location.replace("/login");
+        }
+    }
+  }
   
 }

@@ -18,14 +18,13 @@
             <div class="buttons d-grid gap-2 d-md-flex justify-content-md-end">
                 <!-- For the trainee -->
                 <div class="button-reserve">
-                    <a routerLink="/bestelgeschiedenis">
-                        <button 
-                            type="button" 
-                            class="btn text-black"
-                            (click)="OrderProduct(book.id)"
-                            >Reserveren
-                        </button>
-                    </a>
+                    <button 
+                        type="button" 
+                        class="btn text-black"
+                        data-bs-toggle="modal"
+                        data-bs-target="#orderModel"
+                        >Reserveren
+                    </button>
                     <div class="voorraad">
                         <div *ngIf="book.available">
                             <p class="text-success">Op voorraad</p>
@@ -34,6 +33,26 @@
                             <p class="text-danger">Niet op voorraad</p>
                         </div>
                     </div>
+                </div>
+                    <!-- Modal -->
+                <div class="modal-layout">
+                    <div class="modal fade" id="orderModel" data-bs-backdrop="static" data-bs-keyboard="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title">Reserveren</h1>
+                                </div>
+                                <div class="modal-body">   
+                                    Wil je {{ book.title }} reserveren?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="button-cancel btn text-black" data-bs-dismiss="modal">Annuleren</button>
+                                    <button type="button" class="button-order btn text-black" (click)="OrderProduct(book.id)">Reserveren</button>                               
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <!-- For the Admin -->
                 <div class="button-edit">

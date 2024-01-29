@@ -12,8 +12,7 @@ export class HeaderComponent {
 
   logout() {
     localStorage.clear();
-
-    this.router.navigateByUrl('login');
+    window.location.replace('/login');
   }
 
 }

@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem("WT_USERID", data.id);
                     window.location.replace('/besteloverzicht');
                   } else {
-                    localStorage.clear();
+                    //localStorage.clear();
                     alert("Login is niet gelukt");
                   }
                 },
