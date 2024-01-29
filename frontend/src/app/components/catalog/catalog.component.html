@@ -8,10 +8,12 @@
             <input class="search-input me-2" type="text" [(ngModel)]="query" (keyup.enter)="onSearch()" style="width: 250px;" placeholder="Zoeken op titel...">
             <button class="btn btn-outline" (click)="onSearch()">Zoek</button>
           </div>
-          <div class="btn btn-outline">
-            <a routerLink="/boek-nieuw" class="text-decoration-none text-black">
-                Nieuw boek toevoegen
-            </a>
+          <div *ngIf="admin == 'true'">
+            <div class="btn btn-outline">
+                <a routerLink="/boek-nieuw" class="text-decoration-none text-black">
+                    Nieuw boek toevoegen
+                </a>
+            </div>
           </div>
         </div>
     </nav>

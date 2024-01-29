@@ -12,6 +12,7 @@ export class CatalogComponent {
   books: any[] = [];
   query: string = '';
   searchBooks: any[] = [];
+  admin: string | null | undefined;
 
   constructor (
     private bookService: BookService,
@@ -20,7 +21,12 @@ export class CatalogComponent {
   ) {}
   
   ngOnInit(): void {
-    this.getAllBooks();
+    if (typeof localStorage != 'undefined') {
+      this.admin = localStorage.getItem("WT_ADMIN");
+      this.getAllBooks();
+    } else {
+      //console.log('Localstorage is not available')
+    }
   }
 
   getAllBooks(): void {

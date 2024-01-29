@@ -20,4 +20,13 @@ export class OrderProductService {
     }
     return this.http.post(environment.BACKEND_URL + '/reservation', orderData,  {})
   }
+
+  AssignProductAsAdmin(userId: any, bookId: any, copyId: any): Observable<any> {
+    const orderData = {
+      bookId: bookId,
+      userId: userId,
+      copyId: copyId,
+    }
+    return this.http.post(environment.BACKEND_URL + '/reservation', orderData,  {})
+  }
 }
