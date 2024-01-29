@@ -6,8 +6,8 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideClientHydration } from '@angular/platform-browser';
 import { HomepageComponent } from './components/homepage/homepage.component';
-import { OrderOverviewAdminComponent } from './components/order-overview-admin/order-overview-admin.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
+import { OrderOverviewComponent } from './components/order-overview/order-overview.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'catalogus', component: CatalogComponent},
   { path: 'boek/:id', component: ProductDetailsComponent},
   { path: 'homepage', component: HomepageComponent},
-  { path: 'besteloverzicht', component: OrderOverviewAdminComponent},
+  { path: 'besteloverzicht', component: OrderOverviewComponent},
   { path: 'boek-nieuw', component: NewProductComponent}
 ];
 
