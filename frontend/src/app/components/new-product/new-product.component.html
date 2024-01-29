@@ -1,19 +1,52 @@
 <div class="container-fluid">
     <h1>Nieuw boek toevoegen</h1>
-    <form [formGroup]="newBookForm">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Titel*</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+    <form [formGroup]="newBookForm" (ngSubmit)="submitNewBook()">
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Titel <span class="text-danger">*</span></span>
+            <input formControlName="title" type="text" class="form-control" required>
         </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Auteur*</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Auteur <span class="text-danger">*</span></span>
+            <input formControlName="author" type="text" class="form-control"  required>
         </div>
-        <div class="input-group mb-3">
+        <div class="input-group col mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">ISBN</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
-        </div> 
-        <button type="button" class="btn text-black">
+            <input formControlName="isbnNumber" type="number" class="form-control">
+        </div>
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Beschrijving</span>
+            <!-- <input formControlName="description" type="text" class="form-control" > -->
+            <textarea class="form-control" name="description" id="description" rows="5" formControlName="description"></textarea>
+        </div>
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Uitgever</span>
+            <input formControlName="publisher" type="text" class="form-control">
+        </div>
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Publicatiedatum</span>
+            <input formControlName="releaseDate" type="date" class="form-control">
+        </div>
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Editie</span>
+            <input formControlName="edition" type="number" class="form-control">
+        </div>
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Format</span>
+            <input formControlName="format" type="text" class="form-control">
+        </div>
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Bladzijdes</span>
+            <input formControlName="pageCount" type="number" class="form-control">
+        </div>
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Tags</span>
+            <input formControlName="tags" type="text" class="form-control" placeholder="Scheid de verschillende tags met een komma en een spatie">
+        </div>
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Specialisatie</span>
+            <input formControlName="relatedCourses" type="text" class="form-control" placeholder="Scheid de verschillende specialisaties met een komma en een spatie">
+        </div>
+        <button type="submit" class="btn text-black" [disabled]="newBookForm.invalid">
             Toevoegen
         </button>           
     </form>
