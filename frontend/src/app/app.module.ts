@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from '../app/interceptor/TokenInterceptor';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { OrderOverviewComponent } from './components/order-overview/order-overview.component';
+import { AssignProductComponent } from './components/assign-product/assign-product.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { OrderOverviewComponent } from './components/order-overview/order-overvi
     LoginComponent,
     HomepageComponent,
     NewProductComponent,
-    OrderOverviewComponent
+    OrderOverviewComponent,
+    AssignProductComponent
   ],
   imports: [
     BrowserModule,

@@ -25,4 +25,10 @@ export class UserService {
     return this.http.put<ResponseDto>(environment.BACKEND_URL + '/user/' + id, dto);
   }
 
+  getAllUsers(): Observable<any> {
+    return this.http.get(environment.BACKEND_URL + '/user/all');
+  }
+
+  
+
 }

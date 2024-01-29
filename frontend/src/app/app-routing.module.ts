@@ -8,6 +8,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { OrderOverviewComponent } from './components/order-overview/order-overview.component';
+import { AssignProductComponent } from './components/assign-product/assign-product.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'boek/:id', component: ProductDetailsComponent},
   { path: 'homepage', component: HomepageComponent},
   { path: 'besteloverzicht', component: OrderOverviewComponent},
-  { path: 'boek-nieuw', component: NewProductComponent}
+  { path: 'boek-nieuw', component: NewProductComponent},
+  { path: 'boek-toewijzen', component: AssignProductComponent}
 ];
 
 @NgModule({
