@@ -24,4 +24,8 @@ export class BookService {
     return this.http.get(environment.BACKEND_URL + '/product/book/title/' + title);
   }  
 
+  AddNewBook(newBook: any): Observable<any> {
+    return this.http.post(environment.BACKEND_URL + '/product/book', newBook);
+  }
+
 }
