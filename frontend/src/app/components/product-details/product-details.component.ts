@@ -13,7 +13,8 @@ export class ProductDetailsComponent {
   
   book: any;
   storedQuery: any;
-  //public userId: any = User.id;
+  userId: any='';
+  
 
   constructor(
     private bookService: BookService,
@@ -43,9 +44,9 @@ export class ProductDetailsComponent {
   }
 
   OrderProduct(id: number): void {
-    const userId =  2; //this.userId;
+    this.userId = localStorage.getItem("WT_USERID");
 
-    this.orderproductService.orderProduct(userId, id).subscribe({
+    this.orderproductService.orderProduct(parseInt(this.userId), id).subscribe({
       next: (data) => {
         console.log('Product requested successfully', data);
       },
