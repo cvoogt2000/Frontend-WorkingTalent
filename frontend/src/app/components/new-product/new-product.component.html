@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <h1>Nieuw boek toevoegen</h1>
+    <form [formGroup]="newBookForm">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Titel*</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Auteur*</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">ISBN</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div> 
+        <button type="button" class="btn text-black">
+            Toevoegen
+        </button>           
+    </form>
+</div>
+

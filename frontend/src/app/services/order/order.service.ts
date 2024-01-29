@@ -16,7 +16,7 @@ export class OrderService {
   }
 
   getOrderById(id: number): Observable<any> {
-    return this.http.get(environment.BACKEND_URL + '/reservation/' + id)
+    return this.http.get(environment.BACKEND_URL + '/reservation/user/' + id)
   }
 
   
