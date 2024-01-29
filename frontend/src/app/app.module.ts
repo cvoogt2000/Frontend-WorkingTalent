@@ -9,10 +9,10 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { LoginComponent } from './components/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomepageComponent } from './components/homepage/homepage.component';
-import { OrderOverviewAdminComponent } from './components/order-overview-admin/order-overview-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from '../app/interceptor/TokenInterceptor';
-import { OrderOverviewTraineeComponent } from './components/order-overview-trainee/order-overview-trainee.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
+import { OrderOverviewComponent } from './components/order-overview/order-overview.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +22,8 @@ import { OrderOverviewTraineeComponent } from './components/order-overview-train
     ProductDetailsComponent,
     LoginComponent,
     HomepageComponent,
-    OrderOverviewAdminComponent,
-    OrderOverviewTraineeComponent
+    NewProductComponent,
+    OrderOverviewComponent
   ],
   imports: [
     BrowserModule,

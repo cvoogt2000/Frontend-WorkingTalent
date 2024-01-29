@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { OrderService } from '../../services/order/order.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-order-overview-admin',
-  templateUrl: './order-overview-admin.component.html',
-  styleUrl: './order-overview-admin.component.css'
+  selector: 'app-order-overview',
+  templateUrl: './order-overview.component.html',
+  styleUrl: './order-overview.component.css'
 })
-export class OrderOverviewAdminComponent implements OnInit{
+export class OrderOverviewComponent {
   orders: any[] = [];
   userOrders: any[] = [];
   admin: string | null | undefined;
@@ -25,7 +24,6 @@ export class OrderOverviewAdminComponent implements OnInit{
     } else {
       this.getOrderById(parseInt(this.userID));
     }
-   
   }
 
   getAllOrders(): void {

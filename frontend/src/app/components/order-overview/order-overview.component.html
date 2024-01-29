@@ -33,7 +33,6 @@
                 <th>Einddatum</th>
                 <th>Lesmateriaal</th>
                 <th>Exemplaar</th>
-                <th>Naam</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -43,7 +42,6 @@
                 <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
                 <td>{{ order.copy.book.title }}</td>
                 <td>{{ order.copy.id }}</td>
-                <td>{{ order.user.firstName }}</td>
                 <td>{{ order.status }}</td>
             </tr>
         </tbody>
