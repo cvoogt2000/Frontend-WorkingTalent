@@ -9,32 +9,23 @@ import { OrderService } from '../../services/order/order.service';
 export class OrderOverviewComponent {
   orders: any[] = [];
   userOrders: any[] = [];
-  admin: string | null | undefined;
-  userID: any = '';
+  admin: any='';
 
-  constructor(
-    private orderService: OrderService) {}
+  constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.admin = localStorage.getItem("WT_ADMIN");
-    this.userID = localStorage.getItem("WT_USERID");
-
-    if (this.admin == 'true') {
+    if (typeof localStorage != 'undefined') {
+      this.admin = localStorage.getItem("WT_ADMIN");
       this.getAllOrders();
     } else {
-      this.getOrderById(parseInt(this.userID));
+      //console.log('Localstorage is not available')
     }
+    
   }
 
   getAllOrders(): void {
     this.orderService.getAllOrders().subscribe( data => {
       this.orders = data;
     });
-  }
-
-  getOrderById(id: number): void {
-    this.orderService.getOrderById(id).subscribe(data => {
-      this.orders = data;
-    })
   }
 }

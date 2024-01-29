@@ -34,3 +34,10 @@
 .button-back a {
     color: gray;
 }
+.button-cancel {
+    background-color: gray;
+}
+
+.button-order {
+    background-color: #00e600;
+}

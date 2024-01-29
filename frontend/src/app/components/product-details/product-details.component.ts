@@ -45,10 +45,11 @@ export class ProductDetailsComponent {
 
   OrderProduct(id: number): void {
     this.userId = localStorage.getItem("WT_USERID");
-
+    
     this.orderproductService.orderProduct(parseInt(this.userId), id).subscribe({
       next: (data) => {
         console.log('Product requested successfully', data);
+        window.location.replace("/besteloverzicht");
       },
       error: (error) => {
         console.log('Error requesting product', error);

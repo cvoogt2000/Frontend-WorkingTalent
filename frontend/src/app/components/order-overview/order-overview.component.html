@@ -12,11 +12,20 @@
             </tr>
         </thead>
         <tbody *ngFor="let order of orders">
-            <tr *ngIf="order.copy != null" class="order-item">
+            <tr class="order-item">
                 <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
                 <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
-                <td>{{ order.copy.book.title }}</td>
-                <td>{{ order.copy.id }}</td>
+                <td>
+                    {{ order.copy?.book?.title || order.book?.title }}
+                </td>
+                <td>
+                    <div *ngIf="order.copy && order.copy.id !== ''">
+                        {{ order.copy.id }}
+                    </div>
+                    <div *ngIf="!order.copy">
+                        Geen exemplaar
+                    </div>
+                </td>
                 <td>{{ order.user.firstName }}</td>
                 <td>{{ order.status }}</td>
             </tr>
@@ -37,11 +46,20 @@
             </tr>
         </thead>
         <tbody *ngFor="let order of orders">
-            <tr *ngIf="order.copy != null" class="order-item">
+            <tr class="order-item">
                 <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
                 <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
-                <td>{{ order.copy.book.title }}</td>
-                <td>{{ order.copy.id }}</td>
+                <td>
+                    {{ order.copy?.book?.title || order.book?.title }}
+                </td>
+                <td>
+                    <div *ngIf="order.copy && order.copy.id !== ''">
+                        {{ order.copy.id }}
+                    </div>
+                    <div *ngIf="!order.copy">
+                        Geen exemplaar
+                    </div>
+                </td>
                 <td>{{ order.status }}</td>
             </tr>
         </tbody>
