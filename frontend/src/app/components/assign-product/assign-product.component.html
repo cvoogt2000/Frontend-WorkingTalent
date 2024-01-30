@@ -1,6 +1,6 @@
 <div class="assign-product">
     <div class="container-fluid">
-        <form [formGroup]="AssignForm" (ngSubmit)="AssignProduct()">
+        <form [formGroup]="AssignForm" (ngSubmit)="SubmitButtonType()">
             <!-- Trainee -->
             <div class="col mb-3">
                 <label class="form-label select-label">Assignee</label>
@@ -22,11 +22,31 @@
                     <option *ngFor="let copy of Bookcopies" value={{copy}}>{{copy}}</option>
                 </select>
             </div>
-            <div class="btn btn-assign">
-                <button type="submit" class="btn submit" [disabled]="!AssignForm.valid">
+            <div class="assign-button">
+                <button type="button" class="btn-assign btn text-black" data-bs-toggle="modal" data-bs-target="#assignModal" [disabled]="AssignForm.invalid">
                     Toewijzen
                 </button>
             </div>
+            <div class="modal-layout">
+                <div class="modal fade" id="assignModal" data-bs-backdrop="static" data-bs-keyboard="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title">Toewijzen</h1>
+                            </div>
+                            <div class="modal-body">   
+                                Weet je zeker dat je deze reservering wilt plaatsen?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="button-cancel btn text-black" data-bs-dismiss="modal">Annuleren</button>
+                                <button type="submit" class="button-submit-bestel btn" (click)="setSubmitButtonType('submitBestel')">Toewijzen en naar besteloverzicht</button>
+                                <button type="submit" class="button-submit-terug btn" (click)="setSubmitButtonType('submitToewijzen')">Toewijzen en nog een boek toewijzen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </form>
     </div>
 </div>
