@@ -3,6 +3,7 @@ import { UserService } from '../../services/user/user.service';
 import { BookService } from '../../services/product/book.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OrderProductService } from '../../services/order-product/order-product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assign-product',
@@ -24,7 +25,8 @@ export class AssignProductComponent {
     private userService: UserService,
     private bookService: BookService,
     private formBuilder: FormBuilder,
-    private orderProductService: OrderProductService
+    private orderProductService: OrderProductService,
+    private router: Router
   ) {}
   
   ngOnInit(): void {
@@ -44,7 +46,7 @@ export class AssignProductComponent {
     });
   }
 
-  AssignProduct(): void {
+  AssignProduct(buttonType: string): void {
     this.orderProductService.AssignProductAsAdmin(
       this.AssignForm.controls.user.value,
       this.AssignForm.controls.book.value,
@@ -52,6 +54,11 @@ export class AssignProductComponent {
     ).subscribe({
       next: (data) => {
         console.log('Product successfully assigned', data);
+        if(buttonType === 'submitBestel') {
+          window.location.replace("/besteloverzicht");
+        } else if (buttonType === 'submitToewijzen') {
+          window.location.replace("/boek-toewijzen");
+        }
       },
       error: (error) => {
         console.log('Error assigning product', error);
@@ -59,12 +66,18 @@ export class AssignProductComponent {
     });
   }
 
+  setSubmitButtonType(buttonType: string) {
+    this.SubmitButtonType = () => this.AssignProduct(buttonType);
+  }
+
+  SubmitButtonType: () => void = this.AssignProduct.bind(this, 'defaultButtonType');
+  
+  
   onBookChange() {
     // Get the selected book ID from the form control
     const selectedBookId = this.AssignForm.get('book')?.value as unknown as number;
     this.bookService.getBookById(selectedBookId).subscribe( data => {
       this.Bookcopies = data.copies;
-      //console.log(data);
     });
   }
 }
