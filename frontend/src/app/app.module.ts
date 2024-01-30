@@ -13,6 +13,7 @@ import { OrderOverviewAdminComponent } from './components/order-overview-admin/o
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from '../app/interceptor/TokenInterceptor';
 import { OrderOverviewTraineeComponent } from './components/order-overview-trainee/order-overview-trainee.component';
+import { UserCreateComponent } from './user-create/user-create.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { OrderOverviewTraineeComponent } from './components/order-overview-train
     LoginComponent,
     HomepageComponent,
     OrderOverviewAdminComponent,
-    OrderOverviewTraineeComponent
+    OrderOverviewTraineeComponent,
+    UserCreateComponent
   ],
   imports: [
     BrowserModule,

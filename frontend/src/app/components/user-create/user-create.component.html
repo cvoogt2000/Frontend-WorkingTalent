@@ -1,0 +1,24 @@
+<h1>Gebruiker Aanmaken</h1>
+    <form action="/create_user" method="post">
+        <label for="firstname">Voornaam:</label>
+        <input type="text" id="firstname" name="firstname" required><br><br>
+
+        <label for="lastname">Achternaam:</label>
+        <input type="text" id="lastname" name="lastname" required><br><br>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="password">Wachtwoord:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="isAdminCheckbox">Admin:</label>
+        <input type="checkbox" id="isAdminCheckbox" name="isAdmin" onclick="toggleAdmin()"><br><br>
+
+        <div id="adminOptions" style="display: none;">
+            <label for="adminPrivileges">Admin Privileges:</label>
+            <input type="text" id="adminPrivileges" name="adminPrivileges"><br><br>
+        </div>
+
+        <input type="submit" value="Aanmaken">
+    </form>

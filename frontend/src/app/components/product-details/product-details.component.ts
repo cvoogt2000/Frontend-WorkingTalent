@@ -7,7 +7,11 @@ import { OrderProductService } from '../../services/order-product/order-product.
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css'
+  _styleUrl: './product-details.component.css',
+
+  set styleUrl(value: any) {
+    this.styleUrl = value;
+  },
 })
 export class ProductDetailsComponent {
   
