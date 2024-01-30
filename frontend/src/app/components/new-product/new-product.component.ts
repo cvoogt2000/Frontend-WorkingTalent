@@ -23,7 +23,7 @@ export class NewProductComponent {
     isbnNumber: '',
     publisher: '',
     pageCount: '',
-    relatedCourses: [[]],
+    relatedCourses: '[[]]',
     format: '',
     copies: [[]],
     tags: [[]]

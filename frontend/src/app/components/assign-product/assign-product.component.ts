@@ -63,8 +63,8 @@ export class AssignProductComponent {
     // Get the selected book ID from the form control
     const selectedBookId = this.AssignForm.get('book')?.value as unknown as number;
     this.bookService.getBookById(selectedBookId).subscribe( data => {
-      this.Bookcopies = data;
-      console.log(data);
+      this.Bookcopies = data.copies;
+      //console.log(data);
     });
   }
 }

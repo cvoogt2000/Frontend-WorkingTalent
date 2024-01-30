@@ -1,21 +1,36 @@
 <div class="order-history" *ngIf="admin == 'true'">
     <div class="container-fluid">
-        <h2>Besteloverzicht</h2>
-        <div class="btn btn-outline">
+        <a class="navbar-brand" routerLink="/besteloverzicht" (click)="resetQuery()">
+            <h1><strong>Besteloverzicht</strong></h1>
+        </a>
+        <div class="btn btn-outline button-toewijzen">
             <a routerLink="/boek-toewijzen" class="text-decoration-none text-black">
                 Boek toewijzen
             </a>
         </div>
-    </div>    
-    <table>
+    </div> 
+    <hr>   
+    <table class="table table-hover">
         <thead>
-            <tr>
+            <tr class="header-table">
                 <th>Startdatum</th>
                 <th>Einddatum</th>
-                <th>Lesmateriaal</th>
+                <th>
+                    Lesmateriaal
+                    <div class="search-bar">
+                        <input class="search-input me-2" type="text" [(ngModel)]="queryTitle" (keyup.enter)="onSearchTitle()" style="width: 250px;" placeholder="Zoek op titel...">
+                    </div>
+                </th>
                 <th>Exemplaar</th>
-                <th>Naam</th>
+                <th>
+                    Naam
+                    <!-- Werkt nog niet, moet nog worden uitgezocht -->
+                    <!-- <div class="search-bar">
+                        <input class="search-input me-2" type="text" [(ngModel)]="queryFirstName + queryLastName" (keyup.enter)="onSearchName()" style="width: 250px;" placeholder="Zoek op naam...">
+                    </div> -->
+                </th>
                 <th>Status</th>
+                <th></th>
             </tr>
         </thead>
         <tbody *ngFor="let order of orders">
@@ -29,12 +44,47 @@
                     <div *ngIf="order.copy && order.copy.id !== ''">
                         {{ order.copy.id }}
                     </div>
-                    <div *ngIf="!order.copy">
-                        Geen exemplaar
+                    <div *ngIf="!order.copy && order.book.id !== ''">
+                        <ng-container>
+                            <select class="form-select form-select-sm" (change)="onSelectCopy($event)">
+                                <option disabled selected>Selecteer exemplaar</option>
+                                <ng-container *ngFor="let copy of order.copies">
+                                    <option class="selectCopy" value={{copy}}>{{copy}}</option>
+                                </ng-container>
+                            </select>
+                        </ng-container>
                     </div>
                 </td>
-                <td>{{ order.user.firstName }}</td>
-                <td>{{ order.status }}</td>
+                <td>{{ order.user.firstName + order.user.lastName}}</td>
+                <td>
+                    <div *ngIf="order.status == 'RESERVED'">
+                        Gereserveerd
+                    </div>
+                    <div *ngIf="order.status == 'LOANED'">
+                        Uitgeleend
+                    </div>
+                    <div *ngIf="order.status == 'RETURNED'">
+                        Ingeleverd
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="!order.copy && order.status == 'RESERVED'">
+                        <button 
+                            type="button"
+                            class="btn btn-sm button-uitlenen"
+                            (click)="OrderToLoan(order.id)"
+                            >Uitlenen
+                        </button>
+                    </div>
+                    <div *ngIf="order.copy && order.status == 'LOANED'">
+                        <button 
+                            type="button"
+                            class="btn btn-sm button-terugbrengen"
+                            (click)="LoanToReturned(order.id)"
+                            >Inleveren
+                        </button>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
