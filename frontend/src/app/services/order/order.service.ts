@@ -16,7 +16,23 @@ export class OrderService {
   }
 
   getOrderById(id: number): Observable<any> {
-    return this.http.get(environment.BACKEND_URL + '/reservation/user/' + id)
+    return this.http.get(environment.BACKEND_URL + '/reservation/user/' + id);
+  }
+
+  AssignCopyToOrder(id: number, copyId: number): Observable<any> {
+    return this.http.put(environment.BACKEND_URL + '/reservation/' + id + '/' + copyId, null);
+  }
+
+  ReturnOrder(id: number): Observable<any> {
+    return this.http.put(environment.BACKEND_URL + '/reservation/' + id, null);
+  }
+
+  getBookOrderByTitle(title: string): Observable<any> {
+    return this.http.get(environment.BACKEND_URL + '/reservation/title/' + title);
+  }
+
+  getOrderByName(firstname: string, lastname: string): Observable<any> {
+    return this.http.get(environment.BACKEND_URL + '/reservation/name/' + firstname + lastname)
   }
 
   
