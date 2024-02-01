@@ -1,3 +1,15 @@
-.btn {
+.button-add button {
+    background-color: #00e600;
+}
+
+.button-cancel {
+    background-color: gray;
+}
+
+.button-submit-catalog {
+    background-color: #00e600;
+}
+
+.button-submit-terug {
     background-color: #00e600;
 }
