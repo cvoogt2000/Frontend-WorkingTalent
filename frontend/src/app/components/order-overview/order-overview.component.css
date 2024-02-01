@@ -1,14 +1,7 @@
-  .table {
-    margin-top: 20px;
-  } 
 
   .button-toewijzen {
     background-color: #00e600;
     color: black;
-  }
-
-  .table th {
-    background-color: #00e600;
   }
 
   .button-uitlenen {
@@ -18,5 +11,23 @@
 
   .button-terugbrengen {
     background-color: #00e600;
+    color: black;
+  }
+
+  .navbar {
+    padding-bottom: 0;
+  }
+
+  .btn-outline {
+      background-color: #00e600;
+  }
+
+  .nav-link.active {
+    background-color: #00e600;
+    color: black;
+    margin-bottom: 0%;
+  }
+
+  .nav-link {
     color: black;
   }

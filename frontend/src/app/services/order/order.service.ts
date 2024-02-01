@@ -35,5 +35,17 @@ export class OrderService {
     return this.http.get(environment.BACKEND_URL + '/reservation/name/' + firstname + lastname)
   }
 
+  getAllReservedOrders(): Observable<any> {
+    return this.http.get(environment.BACKEND_URL + '/reservation/reserved');
+  }
+
+  getAllLoanedOrders(): Observable<any> {
+    return this.http.get(environment.BACKEND_URL + '/reservation/loaned');
+  }
+
+  getAllReturnedOrders(): Observable<any> {
+    return this.http.get(environment.BACKEND_URL + '/reservation/returned');
+  }
+
   
 }

@@ -9,6 +9,8 @@ import { BookService } from '../../services/product/book.service';
 })
 export class NewProductComponent {
 
+  newBook: any = {};
+
   constructor (
     private formBuilder: FormBuilder,
     private bookService: BookService
@@ -23,25 +25,36 @@ export class NewProductComponent {
     isbnNumber: '',
     publisher: '',
     pageCount: '',
-    relatedCourses: '[[]]',
+    relatedCourses: '',
     format: '',
     copies: [[]],
     tags: [[]]
   });
 
-  submitNewBook(): void {
-    const newBook = this.newBookForm.value;
-    console.log(newBook);
-    this.bookService.AddNewBook(newBook)
+  submitNewBook(buttonType: string): void {
+    this.newBook = this.newBookForm.value;
+    this.bookService.AddNewBook(this.newBook)
       .subscribe({
-        next: () => {
+        next: (data) => {
+          console.log('Product successfully assigned', data);
+          if(buttonType === 'submitCatalogus') {
+            window.location.replace("/catalogus");
+          } else if (buttonType === 'submitExtra') {
+            window.location.replace("/boek-nieuw");
+          }
           this.newBookForm.reset();
-          alert("Product succesvol aangemaakt!");
         },
         error: (error) => {
           console.log(error);
         }
-      })
+      });
   }
+
+  setSubmitButtonType(buttonType: string) {
+    this.SubmitButtonType = () => this.submitNewBook(buttonType);
+  }
+
+  SubmitButtonType: () => void = this.submitNewBook.bind(this, 'defaultButtonType');
+
   
 }

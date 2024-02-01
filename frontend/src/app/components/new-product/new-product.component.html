@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <h1>Nieuw boek toevoegen</h1>
-    <form [formGroup]="newBookForm" (ngSubmit)="submitNewBook()">
+    <hr>
+    <form [formGroup]="newBookForm" (ngSubmit)="SubmitButtonType()">
         <div class="input-group col mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Titel <span class="text-danger">*</span></span>
             <input formControlName="title" type="text" class="form-control" required>
@@ -16,7 +17,7 @@
         <div class="input-group col mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Beschrijving</span>
             <!-- <input formControlName="description" type="text" class="form-control" > -->
-            <textarea class="form-control" name="description" id="description" rows="5" formControlName="description"></textarea>
+            <textarea class="form-control" name="description" id="description" rows="3" formControlName="description"></textarea>
         </div>
         <div class="input-group col mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Uitgever</span>
@@ -46,9 +47,38 @@
             <span class="input-group-text" id="inputGroup-sizing-default">Specialisatie</span>
             <input formControlName="relatedCourses" type="text" class="form-control" placeholder="Scheid de verschillende specialisaties met een komma en een spatie">
         </div>
-        <button type="submit" class="btn text-black" [disabled]="newBookForm.invalid">
-            Toevoegen
-        </button>           
+        <div class="input-group col mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Exemplaren</span>
+            <input formControlName="copies" type="text" class="form-control" placeholder="Scheid de verschillende exemplaren met een komma en een spatie">
+        </div>
+
+        <div class="button-add">
+            <button type="button" class="btn text-black" data-bs-toggle="modal" data-bs-target="#addBookModal" [disabled]="newBookForm.invalid">
+                Toevoegen
+            </button>  
+        </div>
+        <div class="modal-layout">
+            <div class="modal fade" id="addBookModal" data-bs-backdrop="static" data-bs-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title">Toevoegen</h1>
+                        </div>
+                        <div class="modal-body">   
+                            Weet je zeker dat je dit boek wilt toevoegen?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="button-cancel btn text-black" data-bs-dismiss="modal">Annuleren</button>
+                            <button type="submit" class="button-submit-catalog btn" (click)="setSubmitButtonType('submitCatalogus')">Toevoegen en naar catalogus pagina</button>
+                            <button type="submit" class="button-submit-terug btn" (click)="setSubmitButtonType('submitExtra')">Toevoegen en nog een boek toevoegen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                     
     </form>
 </div>
+
+
 

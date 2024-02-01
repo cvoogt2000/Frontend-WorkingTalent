@@ -64,13 +64,13 @@
             </div>
         </div>
         <div class="image-details">
-            <div class="book-image">
-                <ng-container class="cover-image"*ngIf="book.imageUrl == null">
+            <div class="cover-image">
+                <div *ngIf="book.imageUrl != ''">
+                    <img [src]="book.imageUrl" alt="{{ book.title }}">
+                </div>
+                <div *ngIf="book.imageUrl == ''">
                     <img src="assets/no-book-cover.png" alt="{{ book.title }}">
-                </ng-container>
-                <ng-container class="cover-image"*ngIf="book.imageUrl != null">
-                    <img [src]=removeQuotesUsingReplace(book.imageUrl) alt="{{ book.title }}">
-                </ng-container>
+                </div>
             </div>
             <div class="book-details">
                 <div class="description">
