@@ -1,124 +1,388 @@
 <div class="order-history" *ngIf="admin == 'true'">
-    <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/besteloverzicht" (click)="resetQuery()">
-            <h1><strong>Besteloverzicht</strong></h1>
-        </a>
-        <div class="btn btn-outline button-toewijzen">
-            <a routerLink="/boek-toewijzen" class="text-decoration-none text-black">
-                Boek toewijzen
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" routerLink="/besteloverzicht" (click)="resetQuery()">
+                <h1><strong>Besteloverzicht</strong></h1>
             </a>
+            <div class="search-bar">
+                <input class="search-input me-2" type="text" [(ngModel)]="queryTitle" (keyup.enter)="onSearchTitle()" style="width: 250px;" placeholder="Zoek op titel...">
+                <button class="btn btn-outline" (click)="onSearchTitle()">Zoek</button>
+            </div>
+            <div class="btn btn-outline button-toewijzen">
+                <a routerLink="/boek-toewijzen" class="text-decoration-none text-black">
+                    Boek toewijzen
+                </a>
+            </div>
         </div>
-    </div> 
-    <hr>   
-    <table class="table table-hover">
-        <thead>
-            <tr class="header-table">
-                <th>Startdatum</th>
-                <th>Einddatum</th>
-                <th>
-                    Lesmateriaal
-                    <div class="search-bar">
-                        <input class="search-input me-2" type="text" [(ngModel)]="queryTitle" (keyup.enter)="onSearchTitle()" style="width: 250px;" placeholder="Zoek op titel...">
-                    </div>
-                </th>
-                <th>Exemplaar</th>
-                <th>
-                    Naam
-                    <!-- Werkt nog niet, moet nog worden uitgezocht -->
-                    <!-- <div class="search-bar">
-                        <input class="search-input me-2" type="text" [(ngModel)]="queryFirstName + queryLastName" (keyup.enter)="onSearchName()" style="width: 250px;" placeholder="Zoek op naam...">
-                    </div> -->
-                </th>
-                <th>Status</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let order of orders">
-            <tr class="order-item">
-                <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
-                <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
-                <td>
-                    {{ order.copy?.book?.title || order.book?.title }}
-                </td>
-                <td>
-                    <div *ngIf="order.copy && order.copy.id !== ''">
-                        {{ order.copy.id }}
-                    </div>
-                    <div *ngIf="!order.copy && order.book.id !== ''">
-                        <ng-container>
-                            <select class="form-select form-select-sm" (change)="onSelectCopy($event)">
-                                <option disabled selected>Selecteer exemplaar</option>
-                                <ng-container *ngFor="let copy of order.copies">
-                                    <option class="selectCopy" value={{copy}}>{{copy}}</option>
+    </nav>
+    <hr>
+    <div *ngIf="queryTitle != ''">
+        <div class="orders table-responsive table-bordered">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="header-table">
+                        <th>Startdatum</th>
+                        <th>Einddatum</th>
+                        <th>
+                            Lesmateriaal
+                        </th>
+                        <th>Exemplaar</th>
+                        <th>
+                            Naam
+                            <!-- Werkt nog niet, moet nog worden uitgezocht -->
+                            <!-- <div class="search-bar">
+                                <input class="search-input me-2" type="text" [(ngModel)]="queryFirstName + queryLastName" (keyup.enter)="onSearchName()" style="width: 250px;" placeholder="Zoek op naam...">
+                            </div> -->
+                        </th>
+                        <th>Status</th>
+                        <th>Uitlenen?</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let order of orders">
+                    <tr class="order-item">
+                        <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
+                        <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
+                        <td>
+                            {{ order.copy?.book?.title || order.book?.title }}
+                        </td>
+                        <td>
+                            <div *ngIf="order.copy && order.copy.id !== ''">
+                                {{ order.copy.id }}
+                            </div>
+                            <div *ngIf="!order.copy && order.book.id !== ''">
+                                <ng-container>
+                                    <select class="form-select form-select-sm" (change)="onSelectCopy($event)">
+                                        <option disabled selected>Selecteer exemplaar</option>
+                                        <ng-container *ngFor="let copy of order.copies">
+                                            <option class="selectCopy" value={{copy}}>{{copy}}</option>
+                                        </ng-container>
+                                    </select>
                                 </ng-container>
-                            </select>
-                        </ng-container>
-                    </div>
-                </td>
-                <td>{{ order.user.firstName + order.user.lastName}}</td>
-                <td>
-                    <div *ngIf="order.status == 'RESERVED'">
-                        Gereserveerd
-                    </div>
-                    <div *ngIf="order.status == 'LOANED'">
-                        Uitgeleend
-                    </div>
-                    <div *ngIf="order.status == 'RETURNED'">
-                        Ingeleverd
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="!order.copy && order.status == 'RESERVED'">
-                        <button 
-                            type="button"
-                            class="btn btn-sm button-uitlenen"
-                            (click)="OrderToLoan(order.id)"
-                            >Uitlenen
-                        </button>
-                    </div>
-                    <div *ngIf="order.copy && order.status == 'LOANED'">
-                        <button 
-                            type="button"
-                            class="btn btn-sm button-terugbrengen"
-                            (click)="LoanToReturned(order.id)"
-                            >Inleveren
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                            </div>
+                        </td>
+                        <td>{{ order.user.firstName + order.user.lastName}}</td>
+                        <td>
+                            Gereserveerd
+                        </td>
+                        <td>
+                            <div *ngIf="!order.copy">
+                                <button 
+                                    type="button"
+                                    class="btn btn-sm button-uitlenen"
+                                    (click)="OrderToLoan(order.id)"
+                                    >Uitlenen
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="queryTitle === ''">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-reserved-tab" data-bs-toggle="tab" data-bs-target="#nav-reserved" type="button" role="tab" aria-controls="nav-reserved" aria-selected="true">Gereserveerd</button>
+                <button class="nav-link" id="nav-loaned-tab" data-bs-toggle="tab" data-bs-target="#nav-loaned" type="button" role="tab" aria-controls="nav-loaned" aria-selected="false">Uitgeleend</button>
+                <button class="nav-link" id="nav-returned-tab" data-bs-toggle="tab" data-bs-target="#nav-returned" type="button" role="tab" aria-controls="nav-returned" aria-selected="false">Ingeleverd</button>
+            </div>
+        </nav>
+        <!-- Reserved tab -->
+        <div class="tab-content" id="#nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-reserved" role="tabpanel" aria-labelledby="nav-reserved-tab">
+                <div class="reserved-orders table-responsive table-bordered">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="header-table">
+                                <th>Startdatum</th>
+                                <th>Einddatum</th>
+                                <th>
+                                    Lesmateriaal
+                                </th>
+                                <th>Exemplaar</th>
+                                <th>
+                                    Naam
+                                    <!-- Werkt nog niet, moet nog worden uitgezocht -->
+                                    <!-- <div class="search-bar">
+                                        <input class="search-input me-2" type="text" [(ngModel)]="queryFirstName + queryLastName" (keyup.enter)="onSearchName()" style="width: 250px;" placeholder="Zoek op naam...">
+                                    </div> -->
+                                </th>
+                                <th>Status</th>
+                                <th>Uitlenen?</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let order of reservedOrders">
+                            <tr class="order-item">
+                                <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
+                                <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
+                                <td>
+                                    {{ order.copy?.book?.title || order.book?.title }}
+                                </td>
+                                <td>
+                                    <div *ngIf="!order.copy && order.book.id !== ''">
+                                        <ng-container>
+                                            <select class="form-select form-select-sm" (change)="onSelectCopy($event)">
+                                                <option disabled selected>Selecteer exemplaar</option>
+                                                <ng-container *ngFor="let copy of order.copies">
+                                                    <ng-container *ngIf="order.available">
+                                                        <option class="selectCopy" value={{copy}}>{{copy}}</option>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="!order.available">
+                                                        Niet beschikbaar
+                                                    </ng-container>
+                                                </ng-container>
+                                            </select>
+                                        </ng-container>
+                                    </div>
+                                    <div *ngIf="order.copy && order.copy.id !== ''">
+                                        {{ order.copy.id }}
+                                    </div>
+                                </td>
+                                <td>{{ order.user.firstName + order.user.lastName}}</td>
+                                <td>
+                                    Gereserveerd
+                                </td>
+                                <td>
+                                    <div *ngIf="!order.copy">
+                                        <button 
+                                            type="button"
+                                            class="btn btn-sm button-uitlenen"
+                                            (click)="OrderToLoan(order.id)"
+                                            >Uitlenen
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> 
+        <!-- Loaned tab -->
+        <div class="tab-content" id="#nav-tabContent">
+            <div class="tab-pane fade" id="nav-loaned" role="tabpanel" aria-labelledby="nav-loaned-tab">
+                <div class="loaned-orders table-responsive table-bordered">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="header-table">
+                                <th>Startdatum</th>
+                                <th>Einddatum</th>
+                                <th>
+                                    Lesmateriaal
+                                </th>
+                                <th>Exemplaar</th>
+                                <th>
+                                    Naam
+                                    <!-- Werkt nog niet, moet nog worden uitgezocht -->
+                                    <!-- <div class="search-bar">
+                                        <input class="search-input me-2" type="text" [(ngModel)]="queryFirstName + queryLastName" (keyup.enter)="onSearchName()" style="width: 250px;" placeholder="Zoek op naam...">
+                                    </div> -->
+                                </th>
+                                <th>Status</th>
+                                <th>Ingeleverd?</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let order of loanedOrders">
+                            <tr class="order-item">
+                                <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
+                                <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
+                                <td>
+                                    {{ order.copy?.book?.title || order.book?.title }}
+                                </td>
+                                <td>
+                                    {{ order.copy.id }}
+                                </td>
+                                <td>{{ order.user.firstName + order.user.lastName}}</td>
+                                <td>
+                                    Uitgeleend
+                                </td>
+                                <td>
+                                    <div>
+                                        <button 
+                                            type="button"
+                                            class="btn btn-sm button-terugbrengen"
+                                            (click)="LoanToReturned(order.id)"
+                                            >Inleveren
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Returned tab -->
+        <div class="tab-content" id="#nav-tabContent">
+            <div class="tab-pane fade" id="nav-returned" role="tabpanel" aria-labelledby="nav-returned-tab">
+                <div class="returned-orders table-responsive table-bordered">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="header-table">
+                                <th>Startdatum</th>
+                                <th>Einddatum</th>
+                                <th>
+                                    Lesmateriaal
+                                </th>
+                                <th>Exemplaar</th>
+                                <th>
+                                    Naam
+                                    <!-- Werkt nog niet, moet nog worden uitgezocht -->
+                                    <!-- <div class="search-bar">
+                                        <input class="search-input me-2" type="text" [(ngModel)]="queryFirstName + queryLastName" (keyup.enter)="onSearchName()" style="width: 250px;" placeholder="Zoek op naam...">
+                                    </div> -->
+                                </th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let order of returnedOrders">
+                            <tr class="order-item">
+                                <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
+                                <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
+                                <td>
+                                    {{ order.copy?.book?.title || order.book?.title }}
+                                </td>
+                                <td>
+                                    {{ order.copy.id }}
+                                </td>
+                                <td>{{ order.user.firstName + order.user.lastName}}</td>
+                                <td>
+                                    Ingeleverd
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+
+
+<!-- For trainee -->
 <div class="order-history" *ngIf="admin == 'false'">
-    <h2>Besteloverzicht</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Startdatum</th>
-                <th>Einddatum</th>
-                <th>Lesmateriaal</th>
-                <th>Exemplaar</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let order of orders">
-            <tr class="order-item">
-                <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
-                <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
-                <td>
-                    {{ order.copy?.book?.title || order.book?.title }}
-                </td>
-                <td>
-                    <div *ngIf="order.copy && order.copy.id !== ''">
-                        {{ order.copy.id }}
-                    </div>
-                    <div *ngIf="!order.copy">
-                        Geen exemplaar
-                    </div>
-                </td>
-                <td>{{ order.status }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/besteloverzicht">
+            <h1><strong>Besteloverzicht</strong></h1>
+        </a>
+    </div>
+    <hr> 
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-reserved-tab" data-bs-toggle="tab" data-bs-target="#nav-reserved" type="button" role="tab" aria-controls="nav-reserved" aria-selected="true">Gereserveerd</button>
+            <button class="nav-link" id="nav-loaned-tab" data-bs-toggle="tab" data-bs-target="#nav-loaned" type="button" role="tab" aria-controls="nav-loaned" aria-selected="false">Uitgeleend</button>
+            <button class="nav-link" id="nav-returned-tab" data-bs-toggle="tab" data-bs-target="#nav-returned" type="button" role="tab" aria-controls="nav-returned" aria-selected="false">Ingeleverd</button>
+        </div>
+    </nav>
+    <!-- Reserved tab -->
+    <div class="tab-content" id="#nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-reserved" role="tabpanel" aria-labelledby="nav-reserved-tab">
+            <div class="reserved-orders table-responsive table-bordered">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="header-table">
+                            <th>Startdatum</th>
+                            <th>Einddatum</th>
+                            <th>
+                                Lesmateriaal
+                            </th>
+                            <th>Exemplaar</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let order of reservedOrders">
+                        <tr class="order-item">
+                            <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
+                            <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
+                            <td>
+                                {{ order.copy?.book?.title || order.book?.title }}
+                            </td>
+                            <td>
+                                <div *ngIf="order.copy && order.copy.id !== ''">
+                                    {{ order.copy.id }}
+                                </div>
+                                <div *ngIf="!order.copy && order.book.id !== ''">
+                                    
+                                </div>
+                            </td>
+                            <td>
+                                Gereserveerd
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+    <!-- Loaned tab -->
+    <div class="tab-content" id="#nav-tabContent">
+        <div class="tab-pane fade" id="nav-loaned" role="tabpanel" aria-labelledby="nav-loaned-tab">
+            <div class="loaned-orders table-responsive table-bordered">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="header-table">
+                            <th>Startdatum</th>
+                            <th>Einddatum</th>
+                            <th>
+                                Lesmateriaal
+                            </th>
+                            <th>Exemplaar</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let order of loanedOrders">
+                        <tr class="order-item">
+                            <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
+                            <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
+                            <td>
+                                {{ order.copy?.book?.title || order.book?.title }}
+                            </td>
+                            <td>
+                                {{ order.copy.id }}
+                            </td>
+                            <td>
+                                Uitgeleend
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Returned tab -->
+    <div class="tab-content" id="#nav-tabContent">
+        <div class="tab-pane fade" id="nav-returned" role="tabpanel" aria-labelledby="nav-returned-tab">
+            <div class="returned-orders table-responsive table-bordered">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="header-table">
+                            <th>Startdatum</th>
+                            <th>Einddatum</th>
+                            <th>
+                                Lesmateriaal
+                            </th>
+                            <th>Exemplaar</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let order of returnedOrders">
+                        <tr class="order-item">
+                            <td>{{ order.startDate | date:'dd-MM-yyyy' }}</td>
+                            <td>{{ order.endDate | date:'dd-MM-yyyy' }}</td>
+                            <td>
+                                {{ order.copy?.book?.title || order.book?.title }}
+                            </td>
+                            <td>
+                                {{ order.copy.id }}
+                            </td>
+                            <td>
+                                Ingeleverd
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

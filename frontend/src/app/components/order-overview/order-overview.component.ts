@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { OrderService } from '../../services/order/order.service';
 import { BookService } from '../../services/product/book.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CopyService } from '../../services/copy/copy.service';
 
 @Component({
   selector: 'app-order-overview',
@@ -21,16 +22,27 @@ export class OrderOverviewComponent {
   searchTitles: any[] = [];
   searchNames: any[] = [];
 
+  reservedOrders: any[] = [];
+  loanedOrders: any[] = [];
+  returnedOrders: any[] = [];
+
+  activeTab: string = 'reserved';
+  availableCopy: boolean = true;
+
   constructor(
     private orderService: OrderService,
     private bookService: BookService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private copyService: CopyService) { }
 
   ngOnInit(): void {
     if (typeof localStorage != 'undefined') {
       this.admin = localStorage.getItem("WT_ADMIN");
       this.getAllOrders();
+      this.getAllReserved();
+      this.getAllLoaned();
+      this.getAllReturned();
     } else {
       //console.log('Localstorage is not available')
     }
@@ -58,6 +70,16 @@ export class OrderOverviewComponent {
     this.orders.forEach(order => {
       this.bookService.getBookById(parseInt(order.book?.id)).subscribe(data => {
         order.copies = data.copies;
+        //console.log(order.copies);
+      });
+    });
+  }
+
+  getCopiesForReservedOrders(): void {
+    this.reservedOrders.forEach(order => {
+      this.bookService.getBookById(parseInt(order.book?.id)).subscribe(data => {
+        order.copies = data.copies;
+        order.available = data.available;
         //console.log(data.copies);
       });
     });
@@ -74,6 +96,9 @@ export class OrderOverviewComponent {
       this.orderService.AssignCopyToOrder(id, this.copyId).subscribe({
         next: (data) => {
           this.getAllOrders();
+          this.getAllReserved();
+          this.getAllLoaned();
+          this.getAllReturned();
           console.log('Copy succesfully added to order', data);
         },
         error: (error) => {
@@ -87,7 +112,10 @@ export class OrderOverviewComponent {
     this.orderService.ReturnOrder(id).subscribe({
       next: (data) => {
         this.getAllOrders();
-        console.log('Order succesfullu returned', data);
+        this.getAllReserved();
+        this.getAllLoaned();
+        this.getAllReturned();
+        console.log('Order succesfully returned', data);
       },
       error: (error) => {
         console.log('Error returning order', error);
@@ -129,5 +157,29 @@ export class OrderOverviewComponent {
       this.orders = data;
     });
   }
+
+  getAllReserved(): void {
+    this.orderService.getAllReservedOrders().subscribe(data => {
+      if(data.book != '') {
+        this.reservedOrders = data;
+        this.getCopiesForReservedOrders();
+      } else if(data.copy != '') {
+        this.reservedOrders = data;
+      };
+    });
+  }
+
+  getAllLoaned(): void {
+    this.orderService.getAllLoanedOrders().subscribe(data => {
+      this.loanedOrders = data;
+    });
+  }
+
+  getAllReturned(): void {
+    this.orderService.getAllReturnedOrders().subscribe(data => {
+      this.returnedOrders = data;
+    });
+  }
+
 
 }
