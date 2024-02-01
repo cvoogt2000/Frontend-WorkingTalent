@@ -56,4 +56,16 @@ export class ProductDetailsComponent {
       }
     });
   }
+
+  removeQuotesUsingReplace(str: string): string {
+    if (str === null) {
+      return str;
+    } else {
+      return str.replace(/['"]+/g, '');
+    }    
+  }
+
+  // removeBlockUsingReplace(str: string): string {
+  //   return str.replace(/[[]]+/g, '');
+  // }
 }

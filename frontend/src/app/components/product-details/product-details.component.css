@@ -1,14 +1,18 @@
-.cover-image {
+.cover-image img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    padding-top: 1rem;
-    padding-right: 3rem;
 }
 
 .image-details {
     display: flex;
     flex-direction: row;
+}
+
+.book-image {
+    padding-right: 20px;
+    width: 40%;
+    max-height: 400px;
 }
 
 .detail {
