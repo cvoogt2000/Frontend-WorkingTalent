@@ -22,17 +22,22 @@
         <div *ngFor="let book of books" class="col mb-3">
             <a [routerLink]="['/boek', book.id]" class="text-black text-decoration-none">
                 <div class="card h-100 shadow text-bg-light">
-                    <img [src]="assets/no-book-cover.png" alt="img-thumbnail" class="card-img-fluid mx-auto" style="width: 20rem;">
+                    <ng-container *ngIf="book.imageUrl == null || book.imageUrl == 'null'">
+                        <img src="assets/no-book-cover.png" alt="img-thumbnail" class="card-img-fluid mx-auto" style="width: 20rem;">
+                    </ng-container>
+                    <ng-container *ngIf="book.imageUrl != null && book.imageUrl != 'null'">
+                        <img [src]=removeQuotesUsingReplace(book.imageUrl) alt="img-thumbnail" class="card-img-fluid mx-auto" style="width: 20rem;">
+                    </ng-container>
                     <div class="card-body">
                         <div class="title">
-                            <h5 class="card-title"> {{ book.title }} </h5>
+                            <h5 class="card-title"> {{ removeQuotesUsingReplace(book.title) }} </h5>
                         </div>
                         <div class="author">
-                            <h6 class="card-subtitle text-muted">{{book.author.name}}</h6>
+                            <h6 class="card-subtitle text-muted">{{ removeQuotesUsingReplace(book.author.name) }}</h6>
                         </div>
                         <div class="description">
                             <p class="card-text">
-                                {{ book.description }}
+                                {{ removeQuotesUsingReplace(book.description) }}
                             </p>
                         </div>
                     </div>
