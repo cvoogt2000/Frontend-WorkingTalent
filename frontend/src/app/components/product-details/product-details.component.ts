@@ -56,4 +56,7 @@ export class ProductDetailsComponent {
       }
     });
   }
+  removeQuotesUsingReplace(str: string): string {
+    return str.replace(/['"]+/g, '');
+  }
 }

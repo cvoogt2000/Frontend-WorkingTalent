@@ -50,4 +50,6 @@ export class CatalogComponent {
       });
     });
   }
+  removeQuotesUsingReplace(str: string): string {
+    return str.replace(/['"]+/g, '');}
 }

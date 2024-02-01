@@ -22,7 +22,7 @@
         <div *ngFor="let book of books" class="col mb-3">
             <a [routerLink]="['/boek', book.id]" class="text-black text-decoration-none">
                 <div class="card h-100 shadow text-bg-light">
-                    <img src="assets/no-book-cover.png" alt="img-thumbnail" class="card-img-fluid mx-auto" style="width: 20rem;">
+                    <img [src]="assets/no-book-cover.png" alt="img-thumbnail" class="card-img-fluid mx-auto" style="width: 20rem;">
                     <div class="card-body">
                         <div class="title">
                             <h5 class="card-title"> {{ book.title }} </h5>
